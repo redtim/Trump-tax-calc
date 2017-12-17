@@ -18,15 +18,15 @@ from var import *
 def calculateTax(income, brackets):
     tax = 0.0         
     lastLev=0.0
-    for rate, level  in iter(sorted(newLevs.iteritems())):
+    for rate, level  in iter(sorted(brackets.iteritems())):
         if income > level:
             tax = tax + (level-lastLev)*rate/100
-            ## uncomment to see the "tax brackets"
+            ##uncomment to see the "tax brackets"
             #print "tax {:f} rate {:f} level {:f}".format(tax,rate,level)
             lastLev=level
         else:
             tax = tax + (income - lastLev)*rate/100
-            ## uncomment to see the "excess above last tax bracker"
+            ##uncomment to see the "excess above last tax bracker"
             #print "excess tax {:f}".format((TaxableIncome - lastLev)*rate/100)
             break
     return tax
@@ -41,7 +41,7 @@ oldLevs ={10:9325.0, 15:37950.0, 25:91900.0, 28:191650.0, 33:416700.0,35:418400.
 TaxableIncome= salary - PropertyTax - StateIncomeTax - MortgageInterest - Retirement - OtherDeductions
 tax = calculateTax(TaxableIncome,oldLevs)
 print "2017 what you should pay"
-print "old tax is {:f}]\n\n".format(tax)
+print "old tax is {:f}\n\n".format(tax)
 
 
 
@@ -59,5 +59,5 @@ TaxableIncome = salary - StateTax - MortgageInterest - Retirement - OtherDeducti
 tax = calculateTax(TaxableIncome,newLevs)
 
 print "2018 what you would pay under new tax plan"
-print "new tax is {:f}]\n\n".format(tax)
+print "new tax is {:f}\n\n".format(tax)
 
