@@ -21,10 +21,12 @@ def calculateTax(income, brackets):
     for rate, level  in iter(sorted(newLevs.iteritems())):
         if income > level:
             tax = tax + (level-lastLev)*rate/100
+            ## uncomment to see the "tax brackets"
             #print "tax {:f} rate {:f} level {:f}".format(tax,rate,level)
             lastLev=level
         else:
             tax = tax + (income - lastLev)*rate/100
+            ## uncomment to see the "excess above last tax bracker"
             #print "excess tax {:f}".format((TaxableIncome - lastLev)*rate/100)
             break
     return tax
