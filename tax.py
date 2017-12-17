@@ -38,7 +38,13 @@ oldLevs ={10:9325.0, 15:37950.0, 25:91900.0, 28:191650.0, 33:416700.0,35:418400.
 ######################## Input Your Info in vars.py ########################
 
 ######################### OLD TAX PLAN ###################################
-TaxableIncome= salary - PropertyTax - StateIncomeTax - MortgageInterest - Retirement - OtherDeductions
+## check to see if we should itemize
+Deductions = StateIncomeTax + PropertyTax + MortgageInterest + Retirement + OtherDeductions
+if Deductions < 6350:
+    ## don't itemize
+    Deductions=6350
+## find out what uncle sam thinks we owe taxes on
+TaxableIncome = salary - Deductions
 tax = calculateTax(TaxableIncome,oldLevs)
 print "2017 what you should pay"
 print "old tax is {:f}\n\n".format(tax)
@@ -55,7 +61,13 @@ else:
 if MortgageInterest > 10000:
     MortgageInterest=10000
 
-TaxableIncome = salary - StateTax - MortgageInterest - Retirement - OtherDeductions
+## check to see if we should itemize
+Deductions = StateTax + MortgageInterest + Retirement + OtherDeductions
+if Deductions < 12000:
+    ## don't itemize
+    Deductions=12000
+## find out what uncle sam thinks we owe taxes on
+TaxableIncome = salary - Deductions
 tax = calculateTax(TaxableIncome,newLevs)
 
 print "2018 what you would pay under new tax plan"
